@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# ZenonASI 20151022
+# ZenonASI 20151204
 # Author-side include processor
 #
 # Copyright (c) 2015 by Czq'bqymc.
@@ -94,7 +94,7 @@ def processFDirectives(m):
 def includeHTML(f):
   try:
     with open(f,encoding="utf8") as h:
-      html=h.read()
+      html=h.read().rstrip()
   except OSError as err:
     print("warning: open include "+f+" failed ["+str(err.errno)+"]: "+err.strerror,file=sys.stderr)
     return "[HTML include failed: "+err.strerror+"]"
@@ -107,7 +107,7 @@ def includeMarkdown(f):
   try:
     with open(f,encoding="utf8") as m:
       md=m.read()
-      html=markdown.markdown(md,output_format="html4")
+      html=markdown.markdown(md,output_format="html4").rstrip()
   except OSError as err:
     print("warning: open include "+f+" failed ["+str(err.errno)+"]: "+err.strerror,file=sys.stderr)
     return "[Markdown include failed: "+err.strerror+"]"

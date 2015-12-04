@@ -13,7 +13,7 @@ ZenonASI is written in Python 3 and uses Python-Markdown to handle
 will be ignored, but ZenonASI will otherwise function.
 
 
-Supported directives (as of version 20151022):
+Supported directives (as of version 20151204):
 ----------------------------------------------
 
 `file` and `virtual` are treated identically in ZenonASI.

@@ -13,7 +13,7 @@ ZenonASI is written in Python 3 and uses Python-Markdown to handle
 will be ignored, but ZenonASI will otherwise function.
 
 
-Supported directives (as of version 20151204):
+Supported directives (as of version 20151223):
 ----------------------------------------------
 
 `file` and `virtual` are treated identically in ZenonASI.
@@ -42,6 +42,10 @@ Inserts the modification date and time of `file` into the output file.
     <!--#fsize virtual="file" -->
 
 Inserts the size of `file` into the output file.
+
+    <!--#exec cmd="command line" -->
+
+Executes `command line` and inserts the output into the output file.
 
 Command line:
 -------------

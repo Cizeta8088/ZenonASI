@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# ZenonASI 20151204
+# ZenonASI 20151223
 # Author-side include processor
 #
 # Copyright (c) 2015 by Czq'bqymc.
@@ -21,6 +21,7 @@ import os
 import re
 import argparse
 import time
+import subprocess
 try:
   import markdown
   mdenabled=True
@@ -60,6 +61,18 @@ def processEcho(m):
     output=time.asctime(time.localtime(mtime))
   else:
     output="[invalid echo var: "+echovar+"]"
+  return output
+
+# processExec(m: regex match)
+# Processes #exec directives.
+
+def processExec(m):
+  command=m.group(1)
+  try:
+    output=subprocess.check_output(command,shell=True).decode(sys.stdout.encoding,"replace").rstrip()
+  except subprocess.CalledProcessError as err:
+    print("warning: exec \""+command+"\" failed ["+str(err.returncode)+"]",file=sys.stderr)
+    return "[exec failed: "+str(err.returncode)+"]"
   return output
 
 # processFDrirectives(m: regex match)
@@ -135,6 +148,7 @@ except OSError as err:
 #process input file
 page=re.sub(r'(?i)<!-- *#include *(virtual|file|text)=[\'"]([^\'"]+)[\'"] *-->',processInclude,page)
 page=re.sub(r'(?i)<!-- *#echo *var=[\'"]([^\'"]+)[\'"] *-->',processEcho,page)
+page=re.sub(r'(?i)<!-- *#exec *cmd=[\'"]([^\'"]+)[\'"] *-->',processExec,page)
 page=re.sub(r'(?i)<!-- *#(flastmod|fsize) *(?:virtual|file)=[\'"]([^\'"]+)[\'"] *-->',processFDirectives,page)
 
 #produce output file

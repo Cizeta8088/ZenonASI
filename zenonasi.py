@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# ZenonASI 20151223
+# ZenonASI 20171004
 # Author-side include processor
 #
-# Copyright (c) 2015 by Czq'bqymc.
+# Copyright (c) 2015, 2017 by Cizeta8088.
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
